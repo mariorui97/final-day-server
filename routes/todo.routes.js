@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const axios = require('axios');
 
 let TodoModel = require('../models/Todo.model')
 
@@ -16,14 +17,14 @@ router.get('/todos', (req, res) => {
                     error: 'Something went wrong',
                     message: err
                })
-          })         
+          })              
 })
 
 // will handle all POST requests to http:localhost:5005/api/create
 router.post('/create', (req, res) => {  
-    const {name, description, completed, image} = req.body;
+    const {summonerName, position, note} = req.body;
     console.log(req.body)
-    TodoModel.create({name, description, completed, image})
+    TodoModel.create({summonerName, position, note})
           .then((response) => {
                res.status(200).json(response)
           })

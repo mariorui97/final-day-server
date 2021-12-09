@@ -10,8 +10,7 @@ router.post('/signup', (req, res) => {
     const {username, email, password } = req.body;
     console.log(username, email, password);
  
-    // -----SERVER SIDE VALIDATION ----------
-    /* 
+ 
     if (!username || !email || !password) {
         res.status(500)
           .json({
@@ -33,7 +32,7 @@ router.post('/signup', (req, res) => {
       });
       return;  
     }
-    */
+
 
     // NOTE: We have used the Sync methods here. 
     // creating a salt 
