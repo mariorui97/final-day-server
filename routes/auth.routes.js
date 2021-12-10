@@ -10,7 +10,7 @@ router.post('/signup', (req, res) => {
     const {username, email, password } = req.body;
     console.log(username, email, password);
  
- 
+/*  
     if (!username || !email || !password) {
         res.status(500)
           .json({
@@ -31,7 +31,7 @@ router.post('/signup', (req, res) => {
         errorMessage: 'Password needs to have 8 characters, a number and an Uppercase alphabet'
       });
       return;  
-    }
+    } */
 
 
     // NOTE: We have used the Sync methods here. 
@@ -59,7 +59,17 @@ router.post('/signup', (req, res) => {
         }
       })
 });
- 
+
+router.get("/users", (req, res, next) => {
+  UserModel.find()
+    .then((response) => {
+      res.status(200).json( response)
+    })
+    .catch((err) => {
+      next(err)
+    })
+});
+
 // will handle all POST requests to http:localhost:5005/api/signin
 router.post('/signin', (req, res) => {
     const {email, password } = req.body;

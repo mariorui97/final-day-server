@@ -3,13 +3,14 @@ const router = express.Router()
 const axios = require('axios');
 
 let TodoModel = require('../models/Todo.model')
-
+let DuosModel = require('../models/Duos.model')
 // NOTE: All your API routes will start from /api 
 
 // will handle all GET requests to http:localhost:5005/api/todos
 router.get('/todos', (req, res) => {
      TodoModel.find()
-          .then((todos) => {
+     .populate('userId')
+          .then((todos) => {               
                res.status(200).json(todos)
           })
           .catch((err) => {
