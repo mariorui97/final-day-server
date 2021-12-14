@@ -22,7 +22,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
 app.use(session({
-  secret: 'SQU14TL3', //Ideally this will be in you env file
+  secret: proccess.env.SECRET, //Ideally this will be in you env file
   resave: false,
   saveUninitialized: false, 
   cookie: {
@@ -54,6 +54,10 @@ app.use("/api", authRoutes);
 const chatRoutes = require('./routes/chat.routes');
 app.use('/api', chatRoutes);
 
+app.use((req, res, next) => {
+	// If no routes match, send them the React HTML.
+	res.sendFile(__dirname + "/public/index.html");
+});
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
