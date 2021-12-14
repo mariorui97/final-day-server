@@ -22,7 +22,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
 app.use(session({
-  secret: proccess.env.SECRET, //Ideally this will be in you env file
+  secret: process.env.SECRET, //Ideally this will be in you env file
   resave: false,
   saveUninitialized: false, 
   cookie: {
