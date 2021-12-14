@@ -63,7 +63,7 @@ router.post('/signup', (req, res) => {
 router.get("/users", (req, res, next) => {
   UserModel.find()
     .then((response) => {
-      res.status(200).json( response)
+      res.status(200).json(response)
     })
     .catch((err) => {
       next(err)
