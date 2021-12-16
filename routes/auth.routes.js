@@ -10,28 +10,28 @@ router.post('/signup', (req, res) => {
     const {username, email, password } = req.body;
     console.log(username, email, password);
  
-/*  
+ 
     if (!username || !email || !password) {
         res.status(500)
           .json({
-            errorMessage: 'Please enter username, email and password'
+            error: 'Please enter username, email and password'
           });
         return;  
     }
     const myRegex = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
     if (!myRegex.test(email)) {
         res.status(500).json({
-          errorMessage: 'Email format not correct'
+          error: 'Email format not correct'
         });
         return;  
     }
     const myPassRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
     if (!myPassRegex.test(password)) {
       res.status(500).json({
-        errorMessage: 'Password needs to have 8 characters, a number and an Uppercase alphabet'
+        error: 'Password needs to have 8 characters, a number and an uppercase letter'
       });
       return;  
-    } */
+    } 
 
 
     // NOTE: We have used the Sync methods here. 
@@ -47,13 +47,13 @@ router.post('/signup', (req, res) => {
       .catch((err) => {
         if (err.code === 11000) {
           res.status(500).json({
-            errorMessage: 'username or email entered already exists!',
+            error: 'username or email entered already exists!',
             message: err,
           });
         } 
         else {
           res.status(500).json({
-            errorMessage: 'Something went wrong! Go to sleep!',
+            error: 'Something went wrong! Go to sleep!',
             message: err,
           });
         }
@@ -75,7 +75,7 @@ router.post('/signin', (req, res) => {
     const {email, password } = req.body;
 
     // -----SERVER SIDE VALIDATION ----------
-    /*
+    
     if ( !email || !password) {
         res.status(500).json({
             error: 'Please enter Username. email and password',
@@ -89,7 +89,7 @@ router.post('/signin', (req, res) => {
         })
         return;  
     }
-    */
+    
 
     // Find if the user exists in the database 
     UserModel.findOne({email})
@@ -114,7 +114,7 @@ router.post('/signin', (req, res) => {
       //throw an error if the user does not exists 
       .catch((err) => {
         res.status(500).json({
-            error: 'Email does not exist',
+            error: 'Password and email do not match.',
             message: err
         })
         return;  

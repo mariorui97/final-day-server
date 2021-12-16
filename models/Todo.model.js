@@ -8,6 +8,7 @@ let TodoSchema = new mongoose.Schema({
   tier: {type: String},
   favChamps: {type: String},
   note: {type: String}, 
+  listed: Boolean,
   userId :  [{
     ref: 'user',
     type: mongoose.Schema.Types.ObjectId

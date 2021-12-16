@@ -23,10 +23,11 @@ router.get('/todos', (req, res) => {
 
 // will handle all POST requests to http:localhost:5005/api/create
 router.post('/create', (req, res) => {  
-    const {summonerName, position, note} = req.body;
+    const {summonerName, position, note, listed} = req.body;
     console.log(req.body)
-    TodoModel.create({summonerName, position, note})
+    TodoModel.create({summonerName, position, note, listed, userId: [req.session.loggedInUser._id]})
           .then((response) => {
+
                res.status(200).json(response)
           })
           .catch((err) => {
@@ -52,6 +53,8 @@ router.get('/todos/:todoId', (req, res) => {
      }) 
 })
 
+
+
 // will handle all DELETE requests to http:localhost:5005/api/todos/:id
 router.delete('/todos/:id', (req, res) => {
     TodoModel.findByIdAndDelete(req.params.id)
@@ -69,8 +72,8 @@ router.delete('/todos/:id', (req, res) => {
 // will handle all PATCH requests to http:localhost:5005/api/todos/:id
 router.patch('/todos/:id', (req, res) => {
     let id = req.params.id
-    const {name, description, completed} = req.body;
-    TodoModel.findByIdAndUpdate(id, {$set: {name: name, description: description, completed: completed}}, {new: true})
+    const {summonerName, favChamps, position, note} = req.body;
+    TodoModel.findByIdAndUpdate(id, {$set: {summonerName: summonerName, favChamps: favChamps,  position: position, note: note}}, {new: true})
           .then((response) => {
                res.status(200).json(response)
           })
