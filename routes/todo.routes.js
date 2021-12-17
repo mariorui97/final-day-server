@@ -23,9 +23,9 @@ router.get('/todos', (req, res) => {
 
 // will handle all POST requests to http:localhost:5005/api/create
 router.post('/create', (req, res) => {  
-    const {summonerName, position, note, listed} = req.body;
+    const {summonerName, favChamps, position, note, listed} = req.body;
     console.log(req.body)
-    TodoModel.create({summonerName, position, note, listed, userId: [req.session.loggedInUser._id]})
+    TodoModel.create({summonerName, position, favChamps, note, listed, userId: [req.session.loggedInUser._id]})
           .then((response) => {
 
                res.status(200).json(response)
